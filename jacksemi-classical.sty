@@ -1,0 +1,195 @@
+% =========================================================
+% Jack Semi Classical Book Style
+% =========================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{jacksemi-classical}
+    [2026/09/27 Classical scientific book style]
+
+
+% =========================================================
+% Fonts
+% =========================================================
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage{imfellEnglish}
+\RequirePackage{microtype}
+
+
+% =========================================================
+% Mathematics
+% =========================================================
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{eulervm}
+\RequirePackage{bm}
+
+
+% =========================================================
+% Figures & Tables
+% =========================================================
+
+\RequirePackage{graphicx}
+\RequirePackage{booktabs}
+
+
+% =========================================================
+% Bibliography
+% =========================================================
+
+\RequirePackage{natbib}
+\RequirePackage{chapterbib}
+\RequirePackage{etoolbox}
+
+\setlength{\bibhang}{0pt}
+\setlength{\bibsep}{0.5\baselineskip}
+
+\renewcommand{\bibname}{Bibliography}
+
+\nobibintoc
+
+% Bibliography heading
+\renewcommand{\bibsection}{%
+    {\footnotesize\normalfont\scshape\bibname\par}%
+}
+
+% Pull bibliography entries closer to the heading
+\AtBeginEnvironment{thebibliography}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\partopsep}{0pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\itemsep}{\bibsep}%
+}
+
+% =========================================================
+% Antique Paper
+% =========================================================
+
+\RequirePackage{eso-pic}
+
+\AddToShipoutPictureBG{%
+    \AtPageLowerLeft{%
+        \includegraphics[
+            width=\paperwidth,
+            height=\paperheight
+        ]{pic/antique-paper.png}%
+    }%
+}
+
+
+% =========================================================
+% Antique Ink
+% =========================================================
+
+\RequirePackage{xcolor}
+
+\definecolor{antiqueink}{RGB}{65,52,40}
+\color{antiqueink}
+
+
+% =========================================================
+% Page layout
+\setlrmarginsandblock{34mm}{30mm}{*}
+\setulmarginsandblock{30mm}{34mm}{*}
+
+\setheadfoot{16pt}{24pt}
+\setheaderspaces{*}{8mm}{*}
+
+\checkandfixthelayout
+
+
+% =========================================================
+% Body Typography
+% =========================================================
+
+\setSingleSpace{1.05}
+\SingleSpacing
+
+% Traditional paragraph structure
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt}
+
+
+% =========================================================
+% Chapter Typography
+% =========================================================
+
+\renewcommand{\chapnamefont}{%
+    \normalfont\Large\scshape
+}
+
+\renewcommand{\chapnumfont}{%
+    \normalfont\Huge
+}
+
+\renewcommand{\chaptitlefont}{%
+    \normalfont\Huge\scshape
+}
+
+
+% =========================================================
+% Section Typography
+% =========================================================
+
+\setsecheadstyle{%
+    \large\normalfont\scshape
+}
+
+\setsubsecheadstyle{%
+    \normalsize\normalfont\itshape
+}
+
+\setbeforesecskip{-2.0ex plus -.5ex minus -.2ex}
+\setaftersecskip{0.8ex plus .2ex}
+
+\setlength{\parindent}{0pt}
+
+
+% =========================================================
+% Display Mathematics Spacing
+% =========================================================
+
+\setlength{\abovedisplayskip}{8pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{8pt plus 2pt minus 2pt}
+
+\setlength{\abovedisplayshortskip}{5pt plus 2pt}
+\setlength{\belowdisplayshortskip}{6pt plus 2pt minus 2pt}
+
+
+% =========================================================
+% Table of Contents Typography
+% =========================================================
+
+% Chapter entries
+\renewcommand{\cftchapterfont}{%
+    \normalfont
+}
+
+\renewcommand{\cftchapterpagefont}{%
+    \normalfont
+}
+
+% Section entries
+\renewcommand{\cftsectionfont}{%
+    \normalfont
+}
+
+\renewcommand{\cftsectionpagefont}{%
+    \normalfont
+}
+
+% Subsection entries
+\renewcommand{\cftsubsectionfont}{%
+    \normalfont
+}
+
+\renewcommand{\cftsubsectionpagefont}{%
+    \normalfont
+}
+
+% TOC title
+\renewcommand{\printtoctitle}[1]{%
+    \centering
+    \normalfont\Huge\scshape #1
+}

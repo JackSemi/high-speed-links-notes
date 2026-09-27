@@ -1,0 +1,109 @@
+\chapter{Channel Pulse Response and Modeling}
+
+\section{Overview}
+
+This chapter develops time-domain channel models and examines
+the impulse and pulse responses of communication channels
+
+\section{Channel LTI Model}
+Assume input discrete-time sequence is \(x[n]\), corresponding continuous-time signal \(x(t)\) could be written as
+
+\begin{equation}
+x(t)=\sum_{n=-\infty}^{\infty}x[n]\,w_T(t-nT)
+\end{equation}
+
+where \(w_T(t)\) is a \textbf{window function} with unit amplitude and duration \(T\), corresponding to one symbol period.
+
+\begin{equation}
+w_T(t)=u(t)-u(t-T).
+\end{equation}
+
+The received signal is
+
+\begin{equation}
+y(t)=x(t)*h_{\mathrm{ch}}(t)=\sum_{n=-\infty}^{\infty}x[n]\,w_T(t-nT)*h_{\mathrm{ch}}(t)
+\end{equation}
+
+Define the \textbf{Channel Pulse Response} as
+
+\begin{equation}
+p_{\mathrm{ch}}(t)
+=
+w_T(t)*h_{\mathrm{ch}}(t).
+\end{equation}
+
+Then
+
+\begin{equation}
+y(t)
+=
+\sum_{n=-\infty}^{\infty}
+x[n]\,
+p_{\mathrm{ch}}(t-nT).
+\end{equation}
+
+Let \(t_0\) be the time at which \(p_{\mathrm{ch}}(t)\) reaches its peak, and define
+
+\begin{equation}
+p_{\mathrm{ch}}[n]
+=
+p_{\mathrm{ch}}(t_0+nT).
+\end{equation}
+
+Thus,
+
+\begin{equation}
+p_{\mathrm{ch}}[0]
+=
+p_{\mathrm{ch}}(t_0)
+\end{equation}
+
+is the main cursor.
+
+Sampling the received signal at
+
+\begin{equation}
+t=t_0+kT,
+\end{equation}
+
+gives
+
+\begin{equation}
+y[k]
+=
+y(t_0+kT).
+\end{equation}
+
+Therefore,
+
+\begin{equation}
+y[k]
+=
+\sum_{n=-\infty}^{\infty}
+x[n]\,
+p_{\mathrm{ch}}(t_0+(k-n)T).
+\end{equation}
+
+Using the definition of \(p_{\mathrm{ch}}[n]\),
+
+\begin{equation}
+y[k]
+=
+\sum_{n=-\infty}^{\infty}
+x[n]\,
+p_{\mathrm{ch}}[k-n].
+\end{equation}
+
+Hence,
+
+\begin{equation}
+y[k]
+=
+x[n]*p_{\mathrm{ch}}[n].
+\end{equation}
+
+
+% ---------------------------------------------------------
+% Bibliography
+% ---------------------------------------------------------
+

@@ -1,0 +1,173 @@
+\chapter{Equalization}
+
+\section{Overview}
+
+This chapter introduces equalization techniques used to
+compensate for channel loss and inter-symbol interference
+
+\section{Rx CTLE Equalization}
+Start from a typical CTLE response,
+\begin{equation}
+H_{\mathrm{CTLE}}(s)
+=
+A_0\frac{1+s/\omega_z}{1+s/\omega_p},
+\qquad
+\omega_z<\omega_p
+\end{equation}
+
+\begin{equation}
+H_{\mathrm{CTLE}}(s)
+=
+A_0\frac{\omega_p}{\omega_z}
+\left[
+1-\frac{\omega_p-\omega_z}{s+\omega_p}
+\right]
+\end{equation}
+The first term, \(1\), represents the signal itself, while the second term, \(1/(s+\omega_p)\), represents a low-pass filter. \\
+Therefore, the CTLE can be interpreted as the original signal minus its low-pass-filtered component.\\
+Now we take a look at how CTLE cancel post-cursor in time domain. First write the impulse response of CTLE, which is inverse-transform of transfer function \(H_{\mathrm{CTLE}}(s)\)
+
+\begin{equation}
+h_{\mathrm{CTLE}}(t)
+=
+K\delta(t)-Ce^{-\omega_p t}u(t)
+\end{equation}
+
+where
+
+\begin{equation}
+K=A_0\frac{\omega_p}{\omega_z},
+\qquad
+C=A_0\frac{\omega_p}{\omega_z}(\omega_p-\omega_z).
+\end{equation}
+
+For channel pulse response \(p_{\mathrm{ch}}(t)\),
+
+\begin{equation}
+p_{\mathrm{eq}}(t)
+=
+p_{\mathrm{ch}}(t)*h_{\mathrm{CTLE}}(t)
+\end{equation}
+
+thus
+
+\begin{equation}
+p_{\mathrm{eq}}(t)
+=
+Kp_{\mathrm{ch}}(t)
+-
+C\int_{-\infty}^{t}
+p_{\mathrm{ch}}(\tau)
+e^{-\omega_p(t-\tau)}\,d\tau.
+\end{equation}
+
+Define
+
+\begin{equation}
+m(t)
+=
+\int_{-\infty}^{t}
+p_{\mathrm{ch}}(\tau)
+e^{-\omega_p(t-\tau)}\,d\tau,
+\end{equation}
+
+then
+
+\begin{equation}
+p_{\mathrm{eq}}(t)
+=
+Kp_{\mathrm{ch}}(t)-Cm(t).
+\end{equation}
+
+Since \(m(t)\) is a low-pass filtered version of
+\(p_{\mathrm{ch}}(t)\), the fast-changing main cursor is less
+cancelled, while the slowly varying post-cursor tail is more strongly
+cancelled.\\
+From Chapter 2
+\begin{equation}
+p_{\mathrm{ch}}[n]
+=
+p_{\mathrm{ch}}(t_0+nT).
+\end{equation}
+Define
+
+\begin{equation}
+p_{\mathrm{eq}}[n]
+=
+p_{\mathrm{eq}}(t_0+nT).
+\end{equation}
+
+Since
+
+\begin{equation}
+p_{\mathrm{eq}}(t)
+=
+Kp_{\mathrm{ch}}(t)-Cm(t),
+\end{equation}
+
+we have
+
+\begin{equation}
+p_{\mathrm{eq}}[n]
+=
+Kp_{\mathrm{ch}}[n]
+-
+Cm(t_0+nT),
+\end{equation}
+
+and
+
+\begin{equation}
+p_{\mathrm{eq}}[0]
+=
+Kp_{\mathrm{ch}}[0]
+-
+Cm(t_0).
+\end{equation}
+
+To show
+
+\begin{equation}
+\frac{p_{\mathrm{eq}}[n]}{p_{\mathrm{eq}}[0]}
+<
+\frac{p_{\mathrm{ch}}[n]}{p_{\mathrm{ch}}[0]},
+\end{equation}
+
+substitute the above expressions:
+
+\begin{equation}
+\frac{Kp_{\mathrm{ch}}[n]-Cm(t_0+nT)}
+{Kp_{\mathrm{ch}}[0]-Cm(t_0)}
+<
+\frac{p_{\mathrm{ch}}[n]}
+{p_{\mathrm{ch}}[0]}.
+\end{equation}
+
+After cross multiplication and cancellation,
+
+\begin{equation}
+p_{\mathrm{ch}}[0]\,m(t_0+nT)
+>
+p_{\mathrm{ch}}[n]\,m(t_0).
+\end{equation}
+
+Equivalently,
+
+\begin{equation}
+\frac{m(t_0+nT)}{p_{\mathrm{ch}}[n]}
+>
+\frac{m(t_0)}{p_{\mathrm{ch}}[0]}.
+\end{equation}
+
+Since \(m(t)\) is a low-pass filtered version of
+\(p_{\mathrm{ch}}(t)\), it follows the slowly varying post-cursor
+more strongly than the fast-changing main cursor. Therefore,
+
+\begin{equation}
+\frac{p_{\mathrm{eq}}[n]}{p_{\mathrm{eq}}[0]}
+<
+\frac{p_{\mathrm{ch}}[n]}{p_{\mathrm{ch}}[0]},
+\qquad n=1,2,3,\ldots
+\end{equation}
+
+
